@@ -1,0 +1,26 @@
+.custom-title {
+    font-size: 1.5rem; /* Sesuaikan ukuran sesuai kebutuhan Anda */
+    color: #000;/*ssuaikan warna sesuai kebutuhan Anda */
+    font-weight: bold; /* Sesuaikan gaya font sesuai kebutuhan Anda */
+    text-align: center; /* Sesuaikan perataan teks sesuai kebutuhan Anda */
+}
+
+.d-flex {
+    display: flex;
+}
+
+.justify-content-between {
+    justify-content: space-between;
+}
+
+.justify-content-evenly {
+    justify-content: space-evenly;
+}
+
+.ms-auto {
+    justify-content: end;
+}
+
+.gap-4 {
+    gap: 4px;
+}
