@@ -18,7 +18,7 @@ class jadwalController extends Controller
     public function getAllData()
     {
         return $this->JadwalRepositories->getAllData();
-    }
+    } 
 
     public function createData(jadwalRequest $request)
     {

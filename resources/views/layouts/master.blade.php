@@ -1,17 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="csrf-token" content="{{ csrf_token() }}">   
-    <title>STMIK Adhi Guna</title>
-    @include('layouts.style')
-    <script>
-        let appUrl = "{{ env('APP_URL') }}";
-    </script>
-</head>
-<body>
+@include('layouts.style')
     <div class="container-scroller">
         @include('layouts.sidebar')
         <div class="container-fluid page-body-wrapper">
@@ -36,5 +23,3 @@
     </div>
     <!-- container-scroller -->
     @include('layouts.scripts')
-</body>
-</html>

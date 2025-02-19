@@ -14,9 +14,8 @@ $(document).ready(function() {
                     required: true
                 },
                 sks: {
-                    required: true,
-                    maxlength: 1
-                }
+                    required: true
+                },
             },
             messages: {
                 id_prodi: {
@@ -26,9 +25,8 @@ $(document).ready(function() {
                     required: "Nama mata kuliah harus diisi"
                 },
                 sks: {
-                    required: "SKS harus diisi",
-                    maxlength: "Nilai diisi maximal 1 digit"
-                }
+                    required: "Jumlah SKS harus diisi"
+                },
             },
             highlight: function (element) {
                 $(element).closest('.form-control').removeClass('is-valid').addClass('is-invalid');
@@ -55,7 +53,7 @@ $(document).ready(function() {
     $('#mk').on('input',  function() {
         $(this).valid();
     });
-    
+
     $('#sks').on('input',  function() {
         $(this).valid();
     });

@@ -7,10 +7,10 @@ use App\Interfaces\jadwalInterface;
 use App\Models\Dosen;
 use App\Models\Jadwal;
 use App\Models\kelas;
+use App\Models\MataKuliah;
 use App\Models\ruang;
 use App\Models\Semester;
 use App\Traits\HttpResponseTrait;
-use App\View\Components\matakuliah\mataKuliah;
 use Illuminate\Support\Facades\DB;
 
 class jadwalRepositories implements jadwalInterface
@@ -23,7 +23,7 @@ class jadwalRepositories implements jadwalInterface
     protected $dosenModel;
     use HttpResponseTrait;
 
-    public function __construct(Jadwal $jadwalModel, ruang $ruangModel, mataKuliah $mataKuliahModel, kelas $kelasModel,Semester $semsterModel,Dosen  $dosenModel)
+    public function __construct(Jadwal $jadwalModel, ruang $ruangModel, MataKuliah $mataKuliahModel, kelas $kelasModel,Semester $semsterModel,Dosen  $dosenModel)
     {
         $this->jadwalModel = $jadwalModel;
         $this->ruangModel = $ruangModel;
@@ -50,6 +50,11 @@ class jadwalRepositories implements jadwalInterface
             $data = new $this->jadwalModel;
             $data->id_dosen = $request->input('id_dosen');
             $data->id_mk = $request->input('id_mk');
+            $mataKuliah = MataKuliah::find($data->id_mk);
+            if($mataKuliah) {
+                $data->id_sks = $mataKuliah->sks;
+            }
+            // $data->id_sks = $request->input('id_sks');
             $data->id_kelas = $request->input('id_kelas');
             $data->id_ruang = $request->input('id_ruang');
             $data->id_semester = $request->input('id_semester');
@@ -85,6 +90,7 @@ class jadwalRepositories implements jadwalInterface
             }
             $data->id_dosen = $request->input('id_dosen');
             $data->id_mk = $request->input('id_mk');
+            // $data->id_sks = $request->input('id_sks');
             $data->id_kelas = $request->input('id_kelas');
             $data->id_ruang = $request->input('id_ruang');
             $data->id_semester = $request->input('id_semester');

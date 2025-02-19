@@ -18,6 +18,7 @@ return new class extends Migration
             $table->foreignUuid('id_kelas')->constrained('kelas');
             $table->foreignUuid('id_ruang')->constrained('ruang');
             $table->foreignUuid('id_semester')->constrained('semester');
+            $table->integer('id_sks');
             $table->time('jam_mulai');
             $table->time('jam_selesai');
             $table->enum('hari', ['senin', 'selasa', 'rabu', 'kamis', 'jumat']);

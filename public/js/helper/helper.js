@@ -39,6 +39,27 @@ function successUpdateAlert() {
             confirmButton: "btn btn-primary btn-lg",
         }
     });
+} 
+
+function successLogin() {
+    return Swal.fire({
+        icon: 'success',
+        title: '<span style="font-size: 30px" class="text-success">Berhasil</span>',
+        text: 'Berhasil Login!',
+        showConfirmButton: true,
+        confirmButtonText: 'Oke',
+        background: "#003153",
+        padding: '2em',
+        color: "green",
+        width: 400,
+        timer: 1500,
+        customClass: {
+            icon: 'small-icon',
+            title: 'small-title',
+            content: 'small-content',
+            confirmButton: "btn btn-primary btn-lg",
+        }
+    });
 }
 
 function successDeleteAlert() {
@@ -71,7 +92,7 @@ function errorAlert() {
         icon: 'error',
         title: '<span style="font-size: 30px" class="text-danger">Kesalahan</span>',
         text: 'Terjadi kesalahan!',
-        showConfirmButton: false,
+        showConfirmButton: true,
         timer: 1500
     });
 }
@@ -150,7 +171,6 @@ function existAlert() {
         text: 'Catatan sudah ada',
         showConfirmButton: true,
         confirmButtonText: 'Oke',
-        timer: 2500,
         background: "#003153",
         padding: '2em',
         color: "green",
@@ -185,6 +205,17 @@ function relationAlert() {
             content: 'small-content',
             confirmButton: "btn btn-primary btn-lg",
         }
+    });
+}
+
+function wrongAlert() {
+    Swal.fire({
+        icon: 'warning',
+        title: 'Login Gagal',
+        text: 'Email atau Password anda salah',
+        showConfirmButton: true,
+        background: "#003153",
+        padding: '2em',
     });
 }
 

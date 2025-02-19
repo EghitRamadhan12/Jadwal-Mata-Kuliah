@@ -26,8 +26,8 @@
                                 </select>
                             </div>
                             <div class="form-group fill form-show-validation">
-                                <label>SKS</label>
-                                <input type="number" class="form-control" name="sks" id="sks" placeholder="SKS">
+                                <label>sks</label>
+                                <input type="number" class="form-control" name="sks" id="sks" placeholder="Jumlah SKS">
                             </div>
                         </div>
                     </div>

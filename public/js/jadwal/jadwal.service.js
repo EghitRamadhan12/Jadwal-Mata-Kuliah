@@ -31,6 +31,7 @@ class jadwalService {
             const mataKuliahResponse = await this.ajaxRequest(`${appUrl}/v1/mata-kuliah/`, `Get`)
             const matakuliahData = mataKuliahResponse.data;
             this.populateMataKuliahDropdown(matakuliahData);
+            // this.populateSksByMataKuliah(matakuliahData);
 
             const kelasResponse = await this.ajaxRequest(`${appUrl}/v1/kelas/`, `Get`)
             const kelasData = kelasResponse.data;
@@ -51,10 +52,11 @@ class jadwalService {
                 let tableBody = '';
                 responseData.data.forEach((item, index) => {
                     tableBody += `
-                    <tr>
+                    <tr> 
                         <td>${index + 1}</td>
                         <td>${item.mata_kuliah.mk}</td>
-                        <td>${item.kelas.kelas}</td>aw
+                        <td>${item.mata_kuliah.sks}</td>
+                        <td>${item.kelas.kelas}</td>
                         <td>${item.dosen.dosen}</td>
                         <td>${item.ruang.ruang}</td>
                         <td>${item.semester.semester}</td>
@@ -124,17 +126,30 @@ class jadwalService {
 
     }
 
+    // populateSksByMataKuliah(matakuliahData) {
+    //     $('#id_mk').on('change', function() {
+    //         let selectedId = $(this).val(); // Ambil ID MK yang dipilih
+    //         let selectedMataKuliah = matakuliahData.find(mk => mk.id == selectedId);
+            
+    //         if (selectedMataKuliah) {
+    //             $('#id_sks').val(selectedMataKuliah.sks); // Isi otomatis input SKS
+    //         } else {
+    //             $('#id_sks').val(''); // Kosongkan jika tidak ditemukan
+    //         }
+    //     });
+    // }
+
     populateMataKuliahDropdown(matakuliahData) {
         const mkSelect = $('#id_mk');
         mkSelect.empty();
         mkSelect.append('<option value="" selected disabled hidden >- pilih -</option>')
     
         $.each(matakuliahData, function(index, mataKuliah) {
-            mkSelect.append(`<option value="${mataKuliah.id}">${mataKuliah.mk}</option>`);
+            mkSelect.append(`<option value="${mataKuliah.id}">${mataKuliah.mk}  - ${mataKuliah.sks} SKS</option>`);
         });
     }
     
-    populateKelasDropdown(kelasData){
+    populateKelasDropdown(kelasData) {
         const kelasSelect = $('#id_kelas');
         kelasSelect.empty();
         kelasSelect.append('<option value="" selected disabled hidden >- pilih -</option>')
@@ -215,6 +230,7 @@ class jadwalService {
             $('#modal-title').html('Edit Data')
             $('#id').val(responseData.data.id);
             $('#id_dosen').val(responseData.data.id_dosen);
+            $('#id_').val(responseData.data.id_sks);
             $('#id_mk').val(responseData.data.id_mk);
             $('#id_kelas').val(responseData.data.id_kelas);
             $('#id_ruang').val(responseData.data.id_ruang);

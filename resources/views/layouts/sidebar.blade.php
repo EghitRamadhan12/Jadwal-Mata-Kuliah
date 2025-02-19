@@ -13,7 +13,7 @@
                 </div>
                 <div class="profile-name">
                   <h5 class="mb-0 font-weight-normal">STMIK Adhi Guna</h5>
-                  <span>Jadwal</span>
+                  <span>Palu</span>
                 </div>
               </div>
               <a href="#" id="profile-dropdown" data-toggle="dropdown"><i class="mdi mdi-dots-vertical"></i></a>

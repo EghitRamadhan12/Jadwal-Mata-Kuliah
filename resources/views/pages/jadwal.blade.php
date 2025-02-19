@@ -10,6 +10,7 @@
                 <tr>
                     <th>No</th>
                     <th>Nama Mata Kuliah</th>
+                    <th>SKS</th>
                     <th>Nama Kelas</th>
                     <th>Nama Dosen</th>
                     <th>Nama Ruang</th>

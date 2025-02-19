@@ -15,6 +15,7 @@ class Jadwal extends Model
     protected $fillable = [
         'id_dosen',
         'id_mk',
+        'id_sks',
         'id_kelas',
         'id_ruang',
         'id_semester',
@@ -62,4 +63,15 @@ class Jadwal extends Model
             return 'Jumat'; 
         }
     }
+
+    // protected static function boot() {
+    //     parent::boot();
+    //     static::creating(function ($jadwal) {
+    //         $mataKuliah = MataKuliah::find($jadwal->id_mk);
+
+    //         if($mataKuliah) {
+    //             $jadwal->id_sks = $mataKuliah->sks;
+    //         }
+    //     });
+    // }
 }
