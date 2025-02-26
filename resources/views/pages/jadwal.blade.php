@@ -124,7 +124,8 @@
                 <td>${jadwal.kelas}</td>
                 <td>${jadwal.ruang}</td>
                 <td>${jadwal.dosen}</td>
-                <td>${jadwal.semester}</td>
+                <td>${jadwal.dosen}</td>
+                <td>${jadwal.error+}</td>
             </tr>`;
         });
         $("#tabel_body").html(tableBody);
