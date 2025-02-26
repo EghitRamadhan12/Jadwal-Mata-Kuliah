@@ -2,7 +2,7 @@
 @section('content')
 <div class="card">
     <x-base-header headerTitle="Data Dosen" buttonAdd="true" headerAddButton="Tambah Data" 
-        modalId="#dosenModal" buttonExport="false" exportId="exportDosen">
+        modalId="#dosenModal" buttonGenerate="false" buttonExport="false" exportId="exportDosen">
     </x-base-header>
     <x-base-body>
         <x-base-table initId="dataTable">

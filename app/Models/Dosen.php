@@ -23,4 +23,9 @@ class Dosen extends Model
         return $this->hasMany(jadwal::class, 'id_dosen', 'id');
     }
 
+    public function pengampuh(): HasMany
+    {
+        return $this->hasMany(jadwal::class, 'id_dosen', 'id');
+    }
+
 }

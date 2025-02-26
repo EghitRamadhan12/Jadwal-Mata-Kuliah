@@ -28,4 +28,9 @@ class MataKuliah extends Model
     {
         return $this->hasMany(jadwal::class, 'id_mk', 'id');
     }
+
+    public function pengampuh(): HasMany
+    {
+        return $this->hasMany(jadwal::class, 'id_mk', 'id');
+    }
 }

@@ -1,4 +1,4 @@
-class jadwalService {
+class pengampuService {
     ajaxRequest(url, method, data = null) {
         return new Promise((resolve, reject) => {
             $.ajax({
@@ -37,15 +37,7 @@ class jadwalService {
             const kelasData = kelasResponse.data;
             this.populateKelasDropdown(kelasData);
 
-            const ruangResponse = await this.ajaxRequest(`${appUrl}/v1/ruang/`, `Get`)
-            const ruangData = ruangResponse.data;
-            this.populateRuangDropdown(ruangData);
-
-            const semesterResponse = await this.ajaxRequest(`${appUrl}/v1/semester/`, `Get`)
-            const semesterData = semesterResponse.data;
-            this.populateSemesterDropdown(semesterData);
-
-            const responseData = await this.ajaxRequest(`${appUrl}/v1/jadwal/`, 'GET');
+            const responseData = await this.ajaxRequest(`${appUrl}/v1/pengampuh/`, 'GET');
             console.log(responseData, "response :");
 
             if (responseData && responseData.data) {
@@ -54,15 +46,9 @@ class jadwalService {
                     tableBody += `
                     <tr> 
                         <td>${index + 1}</td>
-                        <td>${item.mata_kuliah.mk}</td>
-                        <td>${item.mata_kuliah.sks}</td>
-                        <td>${item.kelas.kelas}</td>
                         <td>${item.dosen.dosen}</td>
-                        <td>${item.ruang.ruang}</td>
-                        <td>${item.semester.semester}</td>
-                        <td>${item.hari}</td>
-                        <td>${item.jam_mulai}</td>
-                        <td>${item.jam_selesai}</td>
+                        <td>${item.mata_kuliah.mk}</td>
+                        <td>${item.kelas.kelas}</td>
                         <td class="text-center">
                             <button class="btn btn-outline-primary btn-sm edit-modal mr-1" data-toggle="modal" data-target="#jadwalModal" data-id="${item.id}">
                                 <span class="mdi mdi-pencil"></span>
@@ -126,26 +112,13 @@ class jadwalService {
 
     }
 
-    // populateSksByMataKuliah(matakuliahData) {
-    //     $('#id_mk').on('change', function() {
-    //         let selectedId = $(this).val(); // Ambil ID MK yang dipilih
-    //         let selectedMataKuliah = matakuliahData.find(mk => mk.id == selectedId);
-            
-    //         if (selectedMataKuliah) {
-    //             $('#id_sks').val(selectedMataKuliah.sks); // Isi otomatis input SKS
-    //         } else {
-    //             $('#id_sks').val(''); // Kosongkan jika tidak ditemukan
-    //         }
-    //     });
-    // }
-
     populateMataKuliahDropdown(matakuliahData) {
         const mkSelect = $('#id_mk');
         mkSelect.empty();
         mkSelect.append('<option value="" selected disabled hidden >- pilih -</option>')
     
-        $.each(matakuliahData, function(index, mataKuliah) {
-            mkSelect.append(`<option value="${mataKuliah.id}">${mataKuliah.mk}  - ${mataKuliah.sks} SKS</option>`);
+        $.each(matakuliahData, function(index, mata_kuliah) {
+            mkSelect.append(`<option value="${mata_kuliah.id}">${mata_kuliah.mk}  - ${mata_kuliah.sks} SKS</option>`);
         });
     }
     
@@ -158,26 +131,6 @@ class jadwalService {
             kelasSelect.append(`<option value="${kelas.id}">${kelas.kelas}</option>`);
         });
     }
-    
-    populateRuangDropdown(ruangData) {
-        const ruangSelect = $('#id_ruang');
-        ruangSelect.empty();
-        ruangSelect.append('<option value="" selected disabled hidden >- pilih -</option>');
-        
-        $.each(ruangData, function(index, ruang) {
-            ruangSelect.append(`<option value="${ruang.id}">${ruang.ruang}</option>`);
-        });
-    }
-    
-    populateSemesterDropdown(semesterData) {
-        const semesterSelect = $('#id_semester');
-        semesterSelect.empty();
-        semesterSelect.append('<option value="" selected disabled hidden >- pilih -</option>');
-        
-        $.each(semesterData, function(index, semester) {
-            semesterSelect.append(`<option value="${semester.id}">${semester.semester}</option>`);
-        });
-    }
 
     async upsertData(e, checkingEdit) {
         let submitButton = $(e.target).find(':submit');
@@ -187,12 +140,12 @@ class jadwalService {
 
             if (isEditMode) {
                 const id = $('#id').val();
-                const responseData = await this.ajaxRequest(`${appUrl}/v1/jadwal/update/${id}`, 'POST', formData);
+                const responseData = await this.ajaxRequest(`${appUrl}/v1/pengampuh/update/${id}`, 'POST', formData);
                 console.log(responseData);
                 if (responseData.status === 'success') {
                     successUpdateAlert().then(() => {
                         reloadBrowser();
-                        $('#dosenModal').modal('hide');
+                        $('#pengampuModal').modal('hide');
                     });
                 } else if (responseData.code === 422) {
                     warningAlert();
@@ -201,12 +154,12 @@ class jadwalService {
                 }
             } else {
                 submitButton.attr('disabled', true);
-                const responseData = await this.ajaxRequest(`${appUrl}/v1/jadwal/create`, 'POST', formData);
+                const responseData = await this.ajaxRequest(`${appUrl}/v1/pengampuh/create`, 'POST', formData);
                 console.log(responseData);
                 if (responseData.status === 'success') {
                     successCreateAlert().then(() => {
                         reloadBrowser();
-                        $('#dosenModal').modal('hide');
+                        $('#pengampuModal').modal('hide');
                     });
                 } else {
                     errorAlert()
@@ -225,19 +178,13 @@ class jadwalService {
 
     async getDataById(id, checkingEdit) {
         try {
-            const responseData = await this.ajaxRequest(`${appUrl}/v1/jadwal/get/${id}`, 'GET');
+            const responseData = await this.ajaxRequest(`${appUrl}/v1/pengampuh/get/${id}`, 'GET');
             console.log(checkingEdit())
             $('#modal-title').html('Edit Data')
             $('#id').val(responseData.data.id);
             $('#id_dosen').val(responseData.data.id_dosen);
-            $('#id_sks').val(responseData.data.id_sks);
             $('#id_mk').val(responseData.data.id_mk);
             $('#id_kelas').val(responseData.data.id_kelas);
-            $('#id_ruang').val(responseData.data.id_ruang);
-            $('#id_semester').val(responseData.data.id_semester);
-            $('#hari').val(responseData.data.hari);
-            $('#jam_mulai').val(responseData.data.jam_mulai);
-            $('#jam_selesai').val(responseData.data.jam_selesai);
             checkingEdit();
         } catch (error) {
             console.log(error);
@@ -248,7 +195,7 @@ class jadwalService {
         try {
             const result = await confirmDeleteAlert(); 
             if (result.isConfirmed) {
-                const responseData = await this.ajaxRequest(`${appUrl}/v1/jadwal/delete/${id}`, 'DELETE');
+                const responseData = await this.ajaxRequest(`${appUrl}/v1/pengampuh/delete/${id}`, 'DELETE');
                 console.log(responseData);
                 if (responseData.status === 'success') {
                     await successDeleteAlert().then(() => {
@@ -266,4 +213,4 @@ class jadwalService {
     }
 }
 
-export default jadwalService;
+export default pengampuService;

@@ -93,6 +93,14 @@
             </a>
           </li>
           <li class="nav-item menu-items">
+            <a class="nav-link" href="{{ url('/pengampuh') }}">
+              <span class="menu-icon">
+                <i class="mdi mdi-playlist-play"></i>
+              </span>
+              <span class="menu-title">Dosen Pengampu</span>
+            </a>
+          </li>
+          <li class="nav-item menu-items">
             <a class="nav-link" href="{{ url('/jadwal') }}">
               <span class="menu-icon">
                 <i class="mdi mdi-playlist-play"></i>

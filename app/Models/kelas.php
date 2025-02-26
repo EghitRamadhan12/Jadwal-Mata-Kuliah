@@ -21,4 +21,9 @@ class kelas extends Model
     {
         return $this->hasMany(jadwal::class, 'id_kelas', 'id');
     }
+
+    public function pengampuh(): HasMany
+    {
+        return $this->hasMany(jadwal::class, 'id_kelas', 'id');
+    }
 }

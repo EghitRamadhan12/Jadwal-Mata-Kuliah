@@ -1,10 +1,12 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DosenController;
 use App\Http\Controllers\jadwalController;
 use App\Http\Controllers\kelasController;
 use App\Http\Controllers\mataKuliahController;
+use App\Http\Controllers\pengampuhController;
 use App\Http\Controllers\prodiController;
 use App\Http\Controllers\ruangController;
 use App\Http\Controllers\semesterController;
@@ -49,7 +51,14 @@ Route::middleware(['auth', 'web'])->group(function () {
         return view('pages.jadwal');
     });
 
+    Route::get('/pengampuh', function () {
+        return view('pages.pengampu');
+    });
+
     Route::prefix('v1')->group(function () {
+        Route::prefix('dashboard')->controller(DashboardController::class)->group(function () {
+            Route::get('/count-jadwal', 'countJadwal');
+        });
         Route::prefix('dosen')->controller(DosenController::class)->group(function () {
             Route::get('/', 'getAllData');
             Route::post('/create', 'createData');
@@ -103,6 +112,14 @@ Route::middleware(['auth', 'web'])->group(function () {
             Route::delete('/delete/{id}', 'deleteData');
         });
         
+        Route::prefix('pengampuh')->controller(pengampuhController::class)->group(function () {
+            Route::get('/', 'getAllData');
+            Route::post('/create', 'createData');
+            Route::get('/get/{id}', 'getDataById');
+            Route::post('/update/{id}', 'updateData');
+            Route::delete('/delete/{id}', 'deleteData');
+        });
+
         Route::post('logout', [AuthController::class, 'logout']);
     });
 });
