@@ -1,8 +1,7 @@
 @extends('layouts.master')
 @section('content')
 <div class="card">
-    <x-base-header headerTitle="Data Jadwal" buttonAdd="false" headerAddButton="Tambah Data" 
-        modalId="#jadwalModal" nextId="#next_step" genereteId="#mulai" buttonExport="false" exportId="exportJadwal" buttonNext="true" buttonGenerate="true" buttonNextHeader="Next" headerButtonGenerate="Generate">
+    <x-base-header headerTitle="Data Jadwal" buttonAdd="false" headerAddButton="Tambah Data" nextId="#next_step" genereteId="#mulai" buttonExport="false" exportId="exportJadwal" buttonNext="true" buttonGenerate="true" buttonNextHeader="Next" headerButtonGenerate="Generate">
     </x-base-header>
     <x-base-body>
         <x-base-table initId="dataTable">
